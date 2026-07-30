@@ -1,0 +1,48 @@
+SCG EU E-Rechnung Generator
+Copyright 2026 Stumm-Consulting GmbH, Liestal (Schweiz)
+
+Dieses Werk steht unter der Apache-Lizenz, Version 2.0. Der Lizenztext liegt
+unverändert in der Datei LICENSE und ist zusätzlich abrufbar unter
+http://www.apache.org/licenses/LICENSE-2.0
+
+
+Verwendete Fremdkomponenten
+---------------------------
+
+Die folgenden Bibliotheken werden zur Laufzeit eingebunden. Sie sind in diesem
+Repository nicht enthalten und werden mit ihm nicht weitergegeben; die Nennung
+ist Herkunftsangabe und Orientierung, nicht die Erfüllung einer Beilagepflicht.
+Die Angaben stammen aus den Metadaten der installierten Distributionen.
+
+  factur-x       BSD-3-Clause
+  drafthorse     Apache-2.0
+  ReportLab      BSD-3-Clause
+  pypdf          BSD-3-Clause
+  jsonschema     MIT
+  PySide6 (Qt)   LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+                 (genutzt wird die LGPL-Variante)
+
+Ein gebautes Programmpaket enthält darüber hinaus transitiv hereingezogene
+Pakete, unter anderem lxml (BSD-3-Clause), Pillow (MIT-CMU), shiboken6 (LGPL wie
+PySide6) und Saxon über saxonche. Wird ein solches Paket an Dritte
+weitergegeben, sind deren Lizenztexte vollständig beizulegen, für Qt zusätzlich
+die LGPL-Hinweise zum Austausch der Bibliothek. Für saxonche liegt in den
+Paket-Metadaten keine belegbare Lizenzangabe vor; das wäre vor einer Weitergabe
+zu klären.
+
+PyInstaller, mit dem die ausführbare Datei gebaut wird, steht unter
+GPL-2.0-or-later WITH Bootloader-exception. Die Ausnahme erlaubt ausdrücklich,
+den kompilierten Bootloader einzubetten und das Ergebnis unter eigenen
+Bedingungen zu verteilen.
+
+
+Mitgeliefertes ICC-Profil
+-------------------------
+
+eu_rechnung/ressourcen/sRGB2014.icc stammt vom International Color Consortium
+(https://registry.color.org/rgb-registry/profiles/sRGB2014.icc) und wird
+unverändert mitgeliefert. Es dient als OutputIntent der PDF/A-Erzeugung. Das
+Profil darf ohne Einschränkung kopiert, verteilt, eingebettet und verwendet
+werden; veränderte Fassungen müssen die ursprüngliche Identifikation und
+Copyright-Information entfernen und dürfen nicht als Original ausgegeben werden
+(Quelle: https://www.color.org/faqs.xalter).

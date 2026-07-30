@@ -1,0 +1,10 @@
+# Einheitliche Zeilenenden: LF im Repository
+* text=auto eol=lf
+
+# Binärdateien nicht konvertieren
+*.docx binary
+*.xlsx binary
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.zip  binary

@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eu-rechnung"
+# Die Programmversion steht einmal, in eu_rechnung/__init__.py. Der Über-Dialog liest sie
+# von dort (nicht über importlib.metadata, das in der späteren .exe nicht verlässlich ist).
+dynamic = ["version"]
+description = "Werkzeug zur Erzeugung EN-16931-konformer elektronischer Rechnungen (XRechnung, ZUGFeRD)"
+requires-python = ">=3.13"
+dependencies = [
+    "factur-x==4.3",
+    "drafthorse==2025.2.0",
+    "reportlab==5.0.0",
+    "pypdf>=6.0",
+    "jsonschema>=4.0",
+    "PySide6==6.11.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+# Nur für den Bau der ausführbaren Datei, nicht zur Laufzeit (siehe Architektur,
+# „Bau der ausführbaren Datei"). Bewusst getrennt von `dev`, damit die Testumgebung
+# nicht ungefragt den Paketierer mitzieht.
+build = ["pyinstaller>=6.0"]
+
+[project.scripts]
+eu-rechnung = "eu_rechnung.app:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "eu_rechnung.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["eu_rechnung*"]
+
+[tool.setuptools.package-data]
+eu_rechnung = ["ressourcen/*.icc", "ressourcen/*.ico", "ressourcen/sprachen/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "kosit: nutzt den KoSIT-Validator (Java, optional; ohne Java/werkzeuge übersprungen)",
+    "verapdf: nutzt veraPDF (Java, optional; ohne Java/werkzeuge übersprungen)",
+]

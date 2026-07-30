@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+env/
+
+# Lokale Datenhaltung und erzeugte Rechnungen (sensibel, nicht ins Repo)
+*.sqlite
+*.sqlite3
+*.db
+/Ausgabe/
+/Daten/
+
+# Sperrdateien der geöffneten Firma-Dateien (Laufzeit-Artefakt, S-0073)
+*.lock
+
+# Lokale Entwickler-Werkzeuge (veraPDF-CLI etc.; gross, nicht ins Repo)
+/werkzeuge/
+
+# Lokale Dokumente (nicht ins Repo)
+/Lokale_Dokumente/
+
+# Spike-Ausgaben (erzeugte PDFs/XML; nur der Spike-Code wird versioniert)
+/spikes/*/output/
+
+# IDE und Betriebssystem
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
