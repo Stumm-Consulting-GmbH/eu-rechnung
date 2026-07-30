@@ -18,7 +18,7 @@ def _kunde(**anpassungen) -> Kunde:
         id="kun-1",
         kundennummer="D10002",
         name="Beispiel Kunde GmbH",
-        adresse=Adresse(strasse="Musterstraße 5", plz="80331", ort="München", land="DE"),
+        adresse=Adresse(strasse="Musterstraße", hausnummer="5", plz="80331", ort="München", land="DE"),
         email="rechnungseingang@example.org",
         umsatzsteuer_id="DE123456789",
         reverse_charge=True,

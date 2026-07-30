@@ -62,7 +62,7 @@ def beispiel_rechnung() -> tuple[Rechnung, str, str]:
     """
     verkaeufer = EigeneFirma(
         name="Muster Consulting GmbH",
-        adresse=Adresse(strasse="Musterstrasse 1", plz="4000", ort="Basel", land="CH"),
+        adresse=Adresse(strasse="Musterstrasse", hausnummer="1", plz="4000", ort="Basel", land="CH"),
         mehrwertsteuer_id="CHE-999.999.999 MWST",
         email="kontakt@example.com",
         telefon="+41 44 123 45 67",
@@ -80,7 +80,7 @@ def beispiel_rechnung() -> tuple[Rechnung, str, str]:
     )
     kaeufer = Kaeufer(
         name="Beispiel Kunde GmbH",
-        adresse=Adresse(strasse="Musterstraße 5", plz="80331", ort="München", land="DE"),
+        adresse=Adresse(strasse="Musterstraße", hausnummer="5", plz="80331", ort="München", land="DE"),
         umsatzsteuer_id="DE123456789",
         kundennummer="D10002",
         email="rechnungseingang@example.org",
@@ -146,7 +146,7 @@ def beispiel_datenbestand() -> Datenbestand:
     """
     firma = EigeneFirma(
         name="Muster Consulting GmbH",
-        adresse=Adresse(strasse="Musterstrasse 1", plz="4000", ort="Basel", land="CH"),
+        adresse=Adresse(strasse="Musterstrasse", hausnummer="1", plz="4000", ort="Basel", land="CH"),
         mehrwertsteuer_id="CHE-999.999.999 MWST",
         email="kontakt@example.com",
         telefon="+41 44 123 45 67",
@@ -187,7 +187,7 @@ def beispiel_datenbestand() -> Datenbestand:
         verkaeufer=firma,
         kaeufer=Kaeufer(
             name="Beispiel Kunde GmbH",
-            adresse=Adresse(strasse="Musterstraße 5", plz="80331", ort="München", land="DE"),
+            adresse=Adresse(strasse="Musterstraße", hausnummer="5", plz="80331", ort="München", land="DE"),
             umsatzsteuer_id="DE123456789",
             kundennummer="D10002",
             email="rechnungseingang@example.org",
@@ -248,7 +248,7 @@ def beispiel_datenbestand() -> Datenbestand:
         id="kun-1",
         kundennummer="D10002",
         name="Beispiel Kunde GmbH",
-        adresse=Adresse(strasse="Musterstraße 5", plz="80331", ort="München", land="DE"),
+        adresse=Adresse(strasse="Musterstraße", hausnummer="5", plz="80331", ort="München", land="DE"),
         email="rechnungseingang@example.org",
         umsatzsteuer_id="DE123456789",
         reverse_charge=True,

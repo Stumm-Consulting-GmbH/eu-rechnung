@@ -24,6 +24,10 @@ def test_cii_schluesselmerkmale(beispiel_rechnung):
     assert BUSINESS_PROCESS in xml
     # Bestellreferenz BT-13 und Lieferdatum BT-72
     assert "4500000001" in xml
+    # Adresszeile BT-35 (Verkäufer) und BT-50 (Käufer) mit Hausnummer: Die Norm kennt
+    # kein eigenes Feld dafür, das Mapping führt sie mit der Straße zusammen (4T-0201).
+    assert "Musterstrasse 1" in xml
+    assert "Musterstraße 5" in xml
     assert "ActualDeliverySupplyChainEvent" in xml
     # Reverse-Charge (Kategorie AE)
     assert "VATEX-EU-AE" in xml

@@ -47,6 +47,22 @@ class Adresse:
     land: str  # ISO-Ländercode, z.B. "CH", "DE"
     hausnummer: str = ""  # optionales eigenes Adressfeld (S-0001)
 
+    def adresszeile(self) -> str:
+        """Straße und Hausnummer als **eine** Zeile, wie die Ausgabe sie braucht.
+
+        EN 16931 kennt keine separate Hausnummer; das Datenmodell führt sie als eigenes
+        Feld und schreibt die Zusammenführung beim Mapping vor. Sie steht hier und nicht
+        je einmal in Oberfläche, Sichtteil und XML-Mapping: Fünf Kopien derselben Regel
+        wären der sichere Weg, dass die sechste Stelle sie wieder vergisst. Genau so ist
+        der Fehler entstanden, den 4T-0201 behebt.
+
+        Ist die Hausnummer leer, bleibt die Zeile unverändert die Straße; Bestände, die
+        die Hausnummer bisher in der Straße mitführen, sehen deshalb aus wie zuvor.
+        """
+        if not self.hausnummer.strip():
+            return self.strasse
+        return f"{self.strasse} {self.hausnummer}".strip()
+
 
 @dataclass
 class Bankverbindung:

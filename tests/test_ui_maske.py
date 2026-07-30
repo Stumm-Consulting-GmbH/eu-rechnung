@@ -69,6 +69,10 @@ def test_maske_zeigt_vorbelegte_werte(qapp, seed_kunde_bestellung):
     assert maske._verkaeufer_edits["name"].text() == "Muster Consulting GmbH"
     assert maske._kaeufer_edits["name"].text() == "Beispiel Kunde GmbH"
     assert maske._kaeufer_edits["ort"].text() == "München"
+    # Die Hausnummer ist ein eigenes Adressfeld und muss bei beiden Parteien sichtbar
+    # sein; sie fehlte in der Maske, bis 4T-0201 sie ergänzte.
+    assert maske._verkaeufer_edits["hausnummer"].text() == "1"
+    assert maske._kaeufer_edits["hausnummer"].text() == "5"
 
 
 def test_maske_uebernimmt_eingaben(qapp, seed_kunde_bestellung):
@@ -77,6 +81,7 @@ def test_maske_uebernimmt_eingaben(qapp, seed_kunde_bestellung):
     maske = _maske(bestand, bestellung, rechnung)
     maske._nummer.setText("2026-99999")
     maske._kaeufer_edits["ort"].setText("Hamburg")
+    maske._kaeufer_edits["hausnummer"].setText("7a")
     maske.rechnung.positionen.append(
         Position("", "Test", Decimal("2"), Decimal("100.00"), Decimal("200.00"))
     )
@@ -84,6 +89,7 @@ def test_maske_uebernimmt_eingaben(qapp, seed_kunde_bestellung):
     # Die Maske arbeitet auf einer Kopie; die Eingaben landen dort, nicht im Original.
     assert maske.rechnung.rechnungsnummer == "2026-99999"
     assert maske.rechnung.kaeufer.adresse.ort == "Hamburg"
+    assert maske.rechnung.kaeufer.adresse.hausnummer == "7a"
     assert maske.rechnung.kaeufer.name == "Beispiel Kunde GmbH"
 
 

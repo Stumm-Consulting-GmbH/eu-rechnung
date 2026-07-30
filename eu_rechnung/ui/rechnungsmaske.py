@@ -78,6 +78,9 @@ from eu_rechnung.ui.vererbungs_auswahl import VererbungsAuswahl
 _PARTEI_FELDER = [
     ("name", "allgemein.feld_name"),
     ("strasse", "allgemein.feld_strasse"),
+    # Eigenes Feld wie in Firma- und Kunden-Maske; der Katalog-Schlüssel ist derselbe und
+    # steht bereits in allen fünf Sprachdateien.
+    ("hausnummer", "firma.feld_hausnummer"),
     ("plz", "firma.feld_plz"),
     ("ort", "allgemein.feld_ort"),
     ("land", "firma.feld_land"),
@@ -755,6 +758,7 @@ class RechnungsMaske(FeldFehlerMixin, SkontoFelderMixin, AenderungsKnopfMixin, Q
     def _lade_partei(self, edits, name, adresse, steuer_id) -> None:
         edits["name"].setText(name)
         edits["strasse"].setText(adresse.strasse)
+        edits["hausnummer"].setText(adresse.hausnummer)
         edits["plz"].setText(adresse.plz)
         edits["ort"].setText(adresse.ort)
         edits["land"].setText(adresse.land)
@@ -889,6 +893,7 @@ class RechnungsMaske(FeldFehlerMixin, SkontoFelderMixin, AenderungsKnopfMixin, Q
     def _uebernehme_partei(self, edits, obj, steuer_attr) -> None:
         obj.name = edits["name"].text().strip()
         obj.adresse.strasse = edits["strasse"].text().strip()
+        obj.adresse.hausnummer = edits["hausnummer"].text().strip()
         obj.adresse.plz = edits["plz"].text().strip()
         obj.adresse.ort = edits["ort"].text().strip()
         obj.adresse.land = edits["land"].text().strip()

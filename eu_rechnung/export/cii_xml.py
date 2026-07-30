@@ -57,7 +57,9 @@ def _bt20_text(rechnung: Rechnung) -> str:
 
 
 def _setze_adresse(ziel, adresse: Adresse) -> None:
-    ziel.line_one = adresse.strasse
+    # BT-35 (Verkäufer) und BT-50 (Käufer) sind eine freie Adresszeile; die Norm kennt
+    # keine separate Hausnummer, deshalb führt `adresszeile()` sie mit der Straße zusammen.
+    ziel.line_one = adresse.adresszeile()
     ziel.postcode = adresse.plz
     ziel.city_name = adresse.ort
     ziel.country_id = adresse.land

@@ -32,7 +32,10 @@ def test_sichtteil_textinhalt(beispiel_rechnung):
     # Umlaute korrekt als Glyph
     assert "München" in text
     assert "Grüßen" in text
-    assert "Musterstraße" in text
+    # Anschrift mit Hausnummer: Empfängerfeld (Käufer) und Absenderzeile (Verkäufer);
+    # beide führten die Hausnummer nicht, bis 4T-0201 die Adresszeile einführte.
+    assert "Musterstraße 5" in text
+    assert "Musterstrasse 1" in text
     # Reverse-Charge-Hinweis
     assert "Steuerschuldnerschaft des Leistungsempfängers" in text
     # aktive individuelle Felder sichtbar, inaktives ausgeblendet

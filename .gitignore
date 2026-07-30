@@ -30,6 +30,11 @@ env/
 # Spike-Ausgaben (erzeugte PDFs/XML; nur der Spike-Code wird versioniert)
 /spikes/*/output/
 
+# Absturzberichte der JVM (KoSIT und veraPDF laufen als Java-Prozesse; die Berichte
+# landen im Arbeitsverzeichnis und gehoeren nicht ins Repository)
+hs_err_pid*.log
+replay_pid*.log
+
 # IDE und Betriebssystem
 .vscode/
 .idea/

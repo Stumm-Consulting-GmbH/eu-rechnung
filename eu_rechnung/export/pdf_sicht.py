@@ -170,7 +170,7 @@ def _stile() -> dict[str, ParagraphStyle]:
 def _kopfbereich(rechnung: Rechnung, bestellnummer: str, st: dict, sp: Sprachkontext) -> Table:
     """Empfänger-Adressfeld links, Rechnungs-Metadaten rechts daneben."""
     kauf = rechnung.kaeufer
-    adresszeilen = [kauf.name, *kauf.namenszusatz, kauf.adresse.strasse,
+    adresszeilen = [kauf.name, *kauf.namenszusatz, kauf.adresse.adresszeile(),
                     f"{kauf.adresse.plz} {kauf.adresse.ort}", sp.land(kauf.adresse.land)]
     adresszeilen = [z for z in adresszeilen if z and z.strip()]
     adresse = Paragraph("<br/>".join(_p(z) for z in adresszeilen), st["normal"])
@@ -378,7 +378,7 @@ def _mach_fusszeile(verk: EigeneFirma, bank: Bankverbindung | None, sp: Sprachko
         c.setFont(_SCHRIFT, 7.5)
         c.setFillColor(colors.HexColor("#333333"))
         z1 = (
-            f"{verk.name}, {verk.adresse.strasse}, {verk.adresse.plz} "
+            f"{verk.name}, {verk.adresse.adresszeile()}, {verk.adresse.plz} "
             f"{verk.adresse.ort}, {sp.t('sichtteil.fuss_ust_id', id=verk.mehrwertsteuer_id)}"
         )
         z2 = (
@@ -422,7 +422,7 @@ def _baue_pdf(rechnung: Rechnung, bestellnummer: str, sprache: str, waehrung: st
 
     story = []
     absender = (
-        f"{verk.name}, {verk.adresse.strasse}, "
+        f"{verk.name}, {verk.adresse.adresszeile()}, "
         f"{verk.adresse.plz} {verk.adresse.ort}"
     )
     story.append(Paragraph(_p(absender), st["klein"]))

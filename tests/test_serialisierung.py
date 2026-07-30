@@ -408,3 +408,20 @@ def test_rechnung_ohne_bankverbindung_erhaelt_default(beispiel_datenbestand):
     del _erste_rechnung(daten)["bankverbindung"]  # Altbestand ohne das Feld
     zurueck = von_json(Datenbestand, daten)
     assert zurueck.kunden[0].bestellungen[0].rechnungen[0].bankverbindung is None
+
+
+# --- Adresszeile: Straße und Hausnummer (4T-0201) ---------------------------
+
+
+def test_adresszeile_fuegt_hausnummer_an():
+    """Die Ausgabe braucht eine Zeile; EN 16931 kennt keine separate Hausnummer."""
+    adresse = Adresse(strasse="Musterstrasse", hausnummer="1", plz="4000", ort="Basel", land="CH")
+    assert adresse.adresszeile() == "Musterstrasse 1"
+
+
+def test_adresszeile_ohne_hausnummer_bleibt_die_strasse():
+    """Bestände, die die Hausnummer in der Straße mitführen, sehen aus wie bisher."""
+    adresse = Adresse(strasse="Musterstrasse 1", plz="4000", ort="Basel", land="CH")
+    assert adresse.adresszeile() == "Musterstrasse 1"
+    leer = Adresse(strasse="Musterstrasse", hausnummer="   ", plz="4000", ort="Basel", land="CH")
+    assert leer.adresszeile() == "Musterstrasse"

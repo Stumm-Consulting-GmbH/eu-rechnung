@@ -465,7 +465,7 @@ def _kaeufer(**abweichungen) -> Kaeufer:
     """Vollständiger CIUS-Käufer als Prüf-Kandidat; einzelne Felder überschreibbar."""
     daten = dict(
         name="Beispiel Kunde GmbH",
-        adresse=Adresse(strasse="Musterstraße 5", plz="80331", ort="München", land="DE"),
+        adresse=Adresse(strasse="Musterstraße", hausnummer="5", plz="80331", ort="München", land="DE"),
         umsatzsteuer_id="DE123456789",
         kundennummer="D10002",
         email="rechnungseingang@example.org",
