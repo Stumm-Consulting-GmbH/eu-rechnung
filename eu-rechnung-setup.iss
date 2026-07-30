@@ -79,6 +79,13 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; gebündelten Assets. `ignoreversion` gilt bewusst für alles: Die Dateien gehören zu
 ; diesem Bundle und werden gemeinsam ersetzt, nicht einzeln nach Version verglichen.
 Source: "{#Quelle}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Lizenz- und Hinweisdatei liegen der Installation bei (E-013). Sie kommen aus dem
+; Repository-Wurzelverzeichnis und nicht aus dem Build: Die Anwendung braucht sie zur
+; Laufzeit nicht, sie dokumentieren die Herkunft für den, der sie sucht. Die Endung `.txt`
+; kommt erst hier dazu, damit ein Doppelklick sie unter Windows öffnet; im Repository
+; behalten die Dateien ihre Namen, weil GitHub die Lizenz daran erkennt.
+Source: "LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
+Source: "NOTICE"; DestDir: "{app}"; DestName: "NOTICE.txt"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#Produkt}"; Filename: "{app}\{#Programm}"
@@ -95,7 +102,11 @@ Name: "{autodesktop}\{#Produkt}"; Filename: "{app}\{#Programm}"; Tasks: desktopi
 ; angefasst; ebenso bleibt die App-Konfiguration (Zuletzt-geöffnet-Liste,
 ; Autostart-Vermerk) erhalten: Ihr Verlust wäre nur Komfortverlust, ihr Entfernen aber
 ; nicht rückholbar.
-Root: HKA; Subkey: "Software\Classes\.scgr"; ValueType: string; ValueName: ""; ValueData: "{#DateiTyp}"; Flags: uninsdeletevalue
+; `uninsdeletekeyifempty` räumt den Schlüssel mit weg, sobald der Wert entfernt ist; ohne
+; das Flag bliebe eine leere `.scgr`-Hülle zurück (gefunden beim Nachweis in 4T-0198).
+; Bewusst nicht `uninsdeletekey`: Das löschte den Schlüssel bedingungslos, samt Werten, die
+; eine andere Anwendung dort abgelegt haben könnte.
+Root: HKA; Subkey: "Software\Classes\.scgr"; ValueType: string; ValueName: ""; ValueData: "{#DateiTyp}"; Flags: uninsdeletevalue uninsdeletekeyifempty
 Root: HKA; Subkey: "Software\Classes\{#DateiTyp}"; ValueType: string; ValueName: ""; ValueData: "{cm:DateiTypName}"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\{#DateiTyp}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#Programm},0"
 ; Der Öffnen-Befehl übergibt den Dateipfad als erstes Argument; die Programmseite dazu
